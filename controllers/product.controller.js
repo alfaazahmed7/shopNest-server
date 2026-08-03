@@ -27,7 +27,7 @@ const createProduct = async (req, res) => {
         let imageUrl = '';
 
         if (req.file) {
-            const result = await cloudinary.UploadStream.upload(req.file.path);
+            const result = await cloudinary.uploader.upload(req.file.path);
             imageUrl = result.secure_url;
         }
 
@@ -61,12 +61,12 @@ const updateProduct = async (req, res) => {
             product.stock = stock || product.stock;
 
             if (req.file) {
-                const result = await cloudinary.UploadStream.upload(req.file.path);
+                const result = await cloudinary.uploader.upload(req.file.path);
                 product.imageUrl = result.secure_url;
             }
 
             const updatedProduct = await product.save();
-            res.json(updateProduct);
+            res.json(updatedProduct);
         }
         else {
             res.status(404).json({ message: 'Product not found' });
