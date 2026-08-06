@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const sendEmail = require('../utils/sendEmail');
-const User = require('../model/User');
+const User = require('../models/User');
 
 const generateToken = (id) => {
   return jwt.sign({ id },
@@ -55,9 +55,7 @@ const registerUser = async (req, res) => {
   }
 
   catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
+    res.status(500).json({ message: error.message });
   }
 };
 
